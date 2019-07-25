@@ -1,0 +1,13 @@
+{% include "PhoneBookAdress/Homepage.html" %}
+{% block content %}
+    <div class="container">
+        {% block description %}
+            <h3>Add New person</h3>
+        {% endblock %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save">
+        </form>
+    </div>
+{% endblock %}
