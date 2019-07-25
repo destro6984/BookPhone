@@ -2,8 +2,8 @@
 {% block content %}
     <div class="container">
         <form method="post">{% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Update">
+            <p>Are you sure you want to delete "{{ object.first_name }},{{ object.last_name }}"?</p>
+            <input type="submit" value="Confirm">
         </form>
     </div>
 

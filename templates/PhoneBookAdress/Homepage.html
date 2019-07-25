@@ -18,28 +18,57 @@
     <title>AdressBook</title>
 </head>
 <body>
-<div class="container">
+
+
+{% block content %}
+    <div class="container">
     <!--NAVBAR-->
     {% include "PhoneBookAdress/upper_navbar.html" %}
+    <!--  Django messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} text-center">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
 
     <div>
-    <h2 class="text-center">List of your Contats</h2>
-    <ul>
-    {% for person in your_contacts %}
-        <li>{{ person.first_name }},{{ person.last_name }}<a href="{% url 'update' pk=person.pk %}">Edit</a></li>
-    {% endfor %}
-    </ul>
-    </div>
+        {% block description %}
+            <h2 class="text-center">List of your Contacts</h2>
+        {% endblock %}
+        <ul>
+            {% for person in your_contacts %}
+                <li>{{ person.first_name }},{{ person.last_name }}
 
+                    <div class="text-center">
+                        <a class="btn btn-secondary mr-1 ml-5" href="{% url 'update' pk=person.pk %}">Edit</a>
+                        <a class="btn btn-secondary" href="{% url 'delete' pk=person.pk %}">Delete</a>
+                        <a class="btn btn-secondary" href="{% url 'addemail' pk=person.pk %}">Add Email</a>
+                        <a class="btn btn-secondary" href="{% url 'addphone' pk=person.pk %}">Add Phone</a><br>
+                    </div>
+                </li>
+                <ul>
+                    {% for data in person.email_set.all %}
+                        {% if data.email != "" %}
+                            <li>{{ data.email }}</li>
+                        {% endif %}
+                    {% endfor %}
 
-    <!--FORM TO ADD PERSON-->
-    <div>
-        <form action="{% url 'homepage'  %}" method="post">
-            {% csrf_token %}
-            {{ form_add_person }}
-            <input type="submit" value="Add">
-        </form>
+                    {% for data in person.phone_set.all %}
+                        {% if data.phone != "" %}
+                            <li>{{ data.phone }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </ul>
+        <div><!-- PAGINATOR-->
+            {% include "PhoneBookAdress/paginator.html" %}
+        </div>
     </div>
+{% endblock %}
 
 
 </div>

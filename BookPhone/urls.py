@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from PhoneBookAdress.views import AdressBook, PersonUpdate
+from PhoneBookAdress.views import AdressBook, PersonUpdate, DeletePerson, AddEmail, AddPhone, PersonCreate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', AdressBook.as_view(),name='homepage'),
-    path('update/<pk>', PersonUpdate.as_view(),name='update')
+    path('', AdressBook.as_view(), name='homepage'),
+    path('update/<pk>', PersonUpdate.as_view(), name='update'),
+    path('delete/<pk>', DeletePerson.as_view(), name='delete'),
+    path('addemail/<pk>', AddEmail.as_view(), name='addemail'),
+    path('addphone/<pk>', AddPhone.as_view(), name='addphone'),
+    path('create/', PersonCreate.as_view(), name='create'),
 ]
