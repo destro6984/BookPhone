@@ -13,8 +13,8 @@ class AdressBook(View):
     def get(self, request):
         query = request.GET.get('q')
         if query:
-            your_contacts = Person.objects.filter(Q(first_name__contains=query) |
-                                                  Q(last_name__contains=query) |
+            your_contacts = Person.objects.filter(Q(first_name__lower__contains=query) |
+                                                  Q(last_name__lower__contains=query) |
                                                   Q(email__email__contains=query) |
                                                   Q(phone__phone__contains=query)).distinct().order_by("first_name")
         else:
