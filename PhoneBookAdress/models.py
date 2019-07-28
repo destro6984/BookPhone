@@ -16,7 +16,6 @@ class Phone(models.Model):
     person = models.ForeignKey(Person, editable=False,on_delete=models.PROTECT)
     phone = models.CharField(max_length=50)
 
-
     def __str__(self):
         return f"phone: {self.phone}"
 

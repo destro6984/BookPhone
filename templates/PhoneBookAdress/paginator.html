@@ -1,23 +1,23 @@
 <div class="pagination">
 
     {% if your_contacts.has_previous %}
-        <a href="?page=1">First</a>
-        <a href="?page={{ your_contacts.previous_page_number }}">Previous</a>
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ your_contacts.previous_page_number }}">Previous</a>
     {% endif %}
 
     {% for num in your_contacts.paginator.page_range %}
 
         {% if your_contacts.number == num %}
-            <span>{{ num }}</span>
+            <span class="btn btn-outline-info mb-4">{{ num }}</span>
         {% elif num > your_contacts.number|add:'-3' and num < your_contacts.number|add:'3' %}
-            <a href="?page={{ num }}">{{ num }}</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
         {% endif %}
 
     {% endfor %}
 
     {% if your_contacts.has_next %}
-        <a href="?page={{ your_contacts.next_page_number }}">Next</a>
-        <a href="?page={{ your_contacts.paginator.num_pages }}">Last</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ your_contacts.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ your_contacts.paginator.num_pages }}">Last</a>
     {% endif %}
 
 </div>

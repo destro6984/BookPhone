@@ -38,30 +38,38 @@
         {% block description %}
             <h2 class="text-center">List of your Contacts</h2>
         {% endblock %}
-        <ul>
+        <ul style="list-style: none">
             {% for person in your_contacts %}
-                <li>{{ person.first_name }},{{ person.last_name }}
-
-                    <div class="text-center">
-                        <a class="btn btn-secondary mr-1 ml-5" href="{% url 'update' pk=person.pk %}">Edit</a>
-                        <a class="btn btn-secondary" href="{% url 'delete' pk=person.pk %}">Delete</a>
-                        <a class="btn btn-secondary" href="{% url 'addemail' pk=person.pk %}">Add Email</a>
-                        <a class="btn btn-secondary" href="{% url 'addphone' pk=person.pk %}">Add Phone</a><br>
+                <div class="border">
+                    <div class="row">
+                        <div class="col">
+                            <li>{{ person.first_name }},{{ person.last_name }}
+                            </li>
+                        </div>
+                        <div class="col text-right">
+                            <a class="btn btn-secondary mr-1 ml-5"
+                               href="{% url 'update' pk=person.pk %}">Edit</a>
+                            <a class="btn btn-secondary" href="{% url 'delete' pk=person.pk %}">Delete</a>
+                            <a class="btn btn-secondary" href="{% url 'addemail' pk=person.pk %}">Add Email</a>
+                            <a class="btn btn-secondary" href="{% url 'addphone' pk=person.pk %}">Add
+                                Phone</a><br>
+                        </div>
                     </div>
-                </li>
-                <ul>
-                    {% for data in person.email_set.all %}
-                        {% if data.email != "" %}
-                            <li>{{ data.email }}</li>
-                        {% endif %}
-                    {% endfor %}
 
-                    {% for data in person.phone_set.all %}
-                        {% if data.phone != "" %}
-                            <li>{{ data.phone }}</li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
+                    <ul>
+                        {% for data in person.email_set.all %}
+                            {% if data.email != "" %}
+                                <li>{{ data.email }}</li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% for data in person.phone_set.all %}
+                            {% if data.phone != "" %}
+                                <li>{{ data.phone }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
             {% endfor %}
         </ul>
         <div><!-- PAGINATOR-->
